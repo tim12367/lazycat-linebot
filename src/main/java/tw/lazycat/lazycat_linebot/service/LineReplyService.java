@@ -28,7 +28,7 @@ import tw.lazycat.lazycat_linebot.controller.LineController;
  */
 @Service
 public class LineReplyService {
-	private final Logger log = LoggerFactory.getLogger(LineController.class);
+	private final Logger log = LoggerFactory.getLogger(LineReplyService.class);
 	private final MessagingApiClient messagingApiClient;
 	private final MessagingApiBlobClient messagingApiBlobClient;
 
