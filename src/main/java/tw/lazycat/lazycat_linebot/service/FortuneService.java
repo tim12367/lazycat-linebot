@@ -1,11 +1,15 @@
 package tw.lazycat.lazycat_linebot.service;
 
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.linecorp.bot.webhook.model.MessageEvent;
+
+import tw.lazycat.lazycat_linebot.controller.LineController;
 
 /**
  * 抽籤服務
@@ -16,10 +20,11 @@ import com.linecorp.bot.webhook.model.MessageEvent;
 @Service
 @Validated
 public class FortuneService {
-	
+	private final Logger log = LoggerFactory.getLogger(FortuneService.class);
+
 	@Autowired
 	private LineReplyService lineReplyService;
-	
+
 	public void getFortune(@NotNull MessageEvent event) {
 
 		String reply = getFortuneString();
@@ -35,6 +40,7 @@ public class FortuneService {
 	private String getFortuneString() {
 		// 1~100
 		int randomInt = (int) (Math.random() * 100) + 1;
+		log.debug("抽到的數字是: " + randomInt);
 		return getFortuneString(randomInt);
 	}
 
