@@ -1,10 +1,9 @@
 package tw.lazycat.lazycat_linebot.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.lang.InterruptedException;
 import java.util.concurrent.ExecutionException;
-import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +16,6 @@ import com.linecorp.bot.messaging.model.Message;
 import com.linecorp.bot.messaging.model.ReplyMessageRequest;
 import com.linecorp.bot.messaging.model.ReplyMessageResponse;
 import com.linecorp.bot.messaging.model.TextMessage;
-
-import tw.lazycat.lazycat_linebot.controller.LineController;
 
 /**
  * LINE 回應服務，參考LINE官方範例
