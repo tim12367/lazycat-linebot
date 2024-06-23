@@ -64,11 +64,9 @@ public class LineController {
 		}
 
 		// 選項中抽一個
-		if (originalMessageText.startsWith("[") && originalMessageText.endsWith("]") && !originalMessageText.equals("[,]") && originalMessageText.length() > 2) {
+		if (originalMessageText != null && originalMessageText.matches("\\[(.+)\\]")) {
 			try {
-				String arrayString = originalMessageText.substring(1, originalMessageText.length() - 1);
-				String[] jsonArray = arrayString.split(",");
-				fortuneService.lottery(Arrays.asList(jsonArray), event);
+				fortuneService.lottery(originalMessageText, event);
 			} catch (PatternSyntaxException e) {
 				log.error("String.split(,) 轉換失敗", e);
 			}

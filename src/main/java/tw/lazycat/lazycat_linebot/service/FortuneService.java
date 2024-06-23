@@ -1,6 +1,8 @@
 package tw.lazycat.lazycat_linebot.service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -29,21 +31,40 @@ public class FortuneService {
 	/**
 	 * 從列表內抽取，並回覆給客戶
 	 * 
-	 * @param list
-	 * @param event
+	 * @param messageText 如: "[123,456]"
+	 * @param event 如: 您抽到: 123
 	 */
-	public void lottery(@NotNull List<String> list, @NotNull MessageEvent event) {
-		String reply = drawOne(list);
-
+	public void lottery(@NotNull final String messageText, @NotNull MessageEvent event) throws PatternSyntaxException {
+		// 字串轉List<String> 如 "[123,456]" -> List<String>
+		List<String> list = this.stringToList(messageText);
+		
+		// 抽出一筆
+		String reply = this.drawOne(list);
+		
 		// 若抽到空字串
 		if (StringUtils.isBlank(reply)) {
-			log.debug("抽取為空");
 			lineReplyService.replyText(event.replyToken(), "您抽到: 空");
 			return;
+		} else {
+			lineReplyService.replyText(event.replyToken(), "您抽到: " + reply);
 		}
-		lineReplyService.replyText(event.replyToken(), "您抽到: " + reply);
 	}
 
+	/**
+	 * 字串分割成list
+	 * @param text 如: "[123,456]"
+	 * @return List<String>
+	 */
+	private List<String> stringToList(String text) {
+		// 移除頭尾[]
+		String arrayString = this.removeBrackets(text);
+		// 移除頭尾逗號
+		arrayString = this.removeCommas(arrayString);
+		// 切字串
+		String[] jsonArray = arrayString.split(",");
+		return Arrays.asList(jsonArray);
+	}
+	
 	/**
 	 * 抽取list中一個字串
 	 * 
@@ -97,11 +118,23 @@ public class FortuneService {
 
 	/**
 	 * 去除首尾","
+	 * 
 	 * @param data
 	 * @return
 	 */
 	public String removeCommas(String data) {
 		data = data.replaceAll("^,|,$", "");
+		return data;
+	}
+	
+	/**
+	 * 去除首尾"["、"]"
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public String removeBrackets(String data) {
+		data = data.replaceAll("^\\[|\\]$", "");
 		return data;
 	}
 }
