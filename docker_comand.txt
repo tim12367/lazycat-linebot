@@ -1,0 +1,20 @@
+// 建立
+docker build -t tim12367/lazycat-linebot .
+
+// 列出所有images
+docker images
+
+// 運行img
+docker run -p 5000:5000 tim12367/lazycat-linebot
+
+// 運行img，永遠運行
+docker run -p 5000:5000 -it tim12367/lazycat-linebot
+
+// 目前運行容器
+docker ps -a
+
+// 刪除容器
+docker rm 24933d7e442f
+
+// 刪除img
+docker rmi tim12367/lazycat-linebot
