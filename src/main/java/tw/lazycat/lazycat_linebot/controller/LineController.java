@@ -1,5 +1,8 @@
 package tw.lazycat.lazycat_linebot.controller;
 
+import java.util.Arrays;
+import java.util.regex.PatternSyntaxException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +61,17 @@ public class LineController {
 		// 運氣
 		if (originalMessageText.indexOf("運") != -1) {
 			fortuneService.getFortune(event);
+		}
+
+		// 選項中抽一個
+		if (originalMessageText.startsWith("[") && originalMessageText.endsWith("]") && !originalMessageText.equals("[,]") && originalMessageText.length() > 2) {
+			try {
+				String arrayString = originalMessageText.substring(1, originalMessageText.length() - 1);
+				String[] jsonArray = arrayString.split(",");
+				fortuneService.lottery(Arrays.asList(jsonArray), event);
+			} catch (PatternSyntaxException e) {
+				log.error("String.split(,) 轉換失敗", e);
+			}
 		}
 	}
 
