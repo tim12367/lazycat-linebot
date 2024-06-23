@@ -72,7 +72,7 @@ public class FortuneService {
 	 * @return
 	 */
 	public String drawOne(@NotNull List<String> list) {
-		int randomInt = (int) Math.random() * list.size();
+		int randomInt = (int) (Math.random() * list.size());
 		return list.get(randomInt);
 	}
 
