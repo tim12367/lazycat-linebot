@@ -10,5 +10,5 @@ COPY ./target/lazycat-linebot*.jar ./lazycat-linebot.jar
 # 暴露port口
 EXPOSE 5000
 
-# CMD ["/bin/bash"] for test
-CMD ["java","-jar","./lazycat-linebot.jar","--spring.config.location=file:./,classpath:application.properties"]
+# CMD ["/bin/bash"]
+CMD ["java","-jar","./lazycat-linebot.jar","--spring.config.location=./"]
