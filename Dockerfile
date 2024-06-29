@@ -11,4 +11,4 @@ COPY ./target/lazycat-linebot*.jar ./lazycat-linebot.jar
 EXPOSE 5000
 
 # CMD ["/bin/bash"] for test
-CMD ["java","-jar","./lazycat-linebot.jar","--spring.config.location=file:env.properties,classpath:application.properties"]
+CMD ["java","-jar","./lazycat-linebot.jar","--spring.config.location=file:./,classpath:application.properties"]

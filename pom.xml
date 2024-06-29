@@ -67,6 +67,9 @@
 					<excludes>
 						<exclude>**/env.properties</exclude>
 					</excludes>
+					<excludes>
+						<exclude>**/*.p12</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 			<plugin>
