@@ -33,3 +33,4 @@ build/
 .vscode/
 src/main/resources/env.properties
 *.p12
+docker_comand.txt
