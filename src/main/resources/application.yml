@@ -1,0 +1,26 @@
+server:
+  ssl: # 憑證
+    keyAlias: ${KEY_ALIAS}
+    key-store-password: ${KEY_STORE_PASSWORD}
+    enabled: 'true'
+    key-store: classpath:/${KEYSTORE_PATH}
+    keyStoreType: ${KEY_STORE_TYPE}
+  port: ${PROJECT_PORT} # port
+
+logging.level:
+    tw.lazycat.lazycat_linebot: DEBUG
+
+spring:
+  application:
+    name: lazycat-linebot
+
+# linebot
+line:
+  bot:
+    channel-token: ${LINE_CHANNEL_TOKEN}
+    handler:
+      path: /linebot
+    channel-secret: ${LINE_CHANNEL_SECRET}
+    
+management: 
+  endpoints.web.exposure.include: beans
