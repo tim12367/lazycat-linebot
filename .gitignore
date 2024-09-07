@@ -34,3 +34,4 @@ build/
 src/main/resources/env.properties
 *.p12
 docker_comand.txt
+src/main/resources/application.properties
